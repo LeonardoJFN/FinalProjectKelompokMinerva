@@ -5,5 +5,5 @@
     <string name="bottom_menu_profile">Profile</string>
     <string name="bottom_menu_match">Match</string>
     <string name="bottom_menu_likes">Likes</string>
-    <string name="bottom_menu_chat">Chat6</string>
+    <string name="bottom_menu_chat">Chat</string>
 </resources>
