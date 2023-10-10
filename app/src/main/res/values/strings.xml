@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FinalProjectKelompokMinerva</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bottom_menu_profile">Profile</string>
+    <string name="bottom_menu_match">Match</string>
+    <string name="bottom_menu_likes">Likes</string>
+    <string name="bottom_menu_chat">Chat6</string>
 </resources>
