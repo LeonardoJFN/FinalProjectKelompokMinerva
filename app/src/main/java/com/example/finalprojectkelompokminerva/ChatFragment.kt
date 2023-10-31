@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 //import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +16,7 @@ import com.example.finalprojectkelompokminerva.model.*
 class ChatFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var chatAdapter: ChatAdapter
-
+    private lateinit var navController: NavController
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,7 +27,7 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.recycler_view)
-
+        navController = requireActivity().findNavController(R.id.nav_host_fragment)
         // Initialize the chatAdapter here
         chatAdapter = ChatAdapter(
             layoutInflater,
@@ -77,12 +79,8 @@ class ChatFragment : Fragment() {
 
     //This will create a pop up dialog when one of the items from the recycler view is clicked.
     private fun showSelectionDialog(chat: ChatModel) {
-        AlertDialog.Builder(requireContext())
-            //Set the title for the dialog
-            .setTitle("Chat Selected")
-            //Set the message for the dialog
-            .setMessage("You have selected ${chat.chatName}")
-            //Set if the OK button should be enabled
-            .setPositiveButton("OK") { _, _ -> }.show()
+        val bundle = Bundle()
+        bundle.putString("chatName", chat.chatName)
+        navController.navigate(R.id.action_chatFragment_to_chatDetailFragment,bundle)
     }
 }

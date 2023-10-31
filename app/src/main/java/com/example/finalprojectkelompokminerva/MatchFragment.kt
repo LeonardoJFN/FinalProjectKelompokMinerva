@@ -24,20 +24,24 @@ class MatchFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_match, container, false)
 
-        toolbar = view.findViewById(R.id.toolbar)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-
-        recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = MatchAdapter()
-
-        val fab: FloatingActionButton = view.findViewById(R.id.fab_filter)
-        fab.setOnClickListener { view ->
-            val popup = PopupMenu(context, view)
-            val inflater: MenuInflater = popup.menuInflater
-            inflater.inflate(R.menu.filter_menu, popup.menu)//ganti R.menu.filter_menu, popup.menu dengan menu anda sendiri
-            popup.show()
-        }
+//        toolbar = view.findViewById(R.id.toolbar)
+//        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+//
+//        recyclerView = view.findViewById(R.id.recyclerView)
+//        recyclerView.layoutManager = LinearLayoutManager(context)
+//        recyclerView.adapter = MatchAdapter()
+//
+//        val fab: FloatingActionButton = view.findViewById(R.id.fab_filter)
+//        fab.setOnClickListener { view ->
+//            val popup = PopupMenu(context, view)
+//            val inflater: MenuInflater = popup.menuInflater
+//            inflater.inflate(
+//                R.menu.filter_menu,
+//                popup.menu
+//            )//ganti R.menu.filter_menu, popup.menu dengan menu anda sendiri
+//            popup.show()
+//        }
 
         return view
     }
+}

@@ -1,9 +1,10 @@
-package com.example.finalprojectkelompokminerva
+package com.example.finalprojectkelompokminerva.model
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalprojectkelompokminerva.R
 
 class MatchAdapter : RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
 
