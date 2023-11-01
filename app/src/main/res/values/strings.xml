@@ -6,4 +6,8 @@
     <string name="bottom_menu_match">Match</string>
     <string name="bottom_menu_likes">Likes</string>
     <string name="bottom_menu_chat">Chat</string>
+    <string name="number">Number</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="city">City</string>
 </resources>
