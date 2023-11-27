@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "633833071514",
+    "firebase_url": "https://projectkelompokminerva-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "projectkelompokminerva",
+    "storage_bucket": "projectkelompokminerva.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633833071514:android:82ee0a6391e4deeddf9023",
+        "android_client_info": {
+          "package_name": "com.example.finalprojectkelompokminerva"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd_MoiimZBGR6pFpk84IcTwkF3UxTYzRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
