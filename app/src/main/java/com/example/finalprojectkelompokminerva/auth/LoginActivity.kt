@@ -2,19 +2,23 @@ package com.example.finalprojectkelompokminerva.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.example.finalprojectkelompokminerva.R
 import com.example.finalprojectkelompokminerva.databinding.ActivityLoginBinding
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding : ActivityLoginBinding
 
     val auth = FirebaseAuth.getInstance()
-    private val verificationId: String? = null
+    private var verificationId: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -42,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun sendOtp(number: String) {
+        private fun sendOtp(number: String) {
         binding.sendOtp.showLoadingButton()
 
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -54,10 +58,26 @@ class LoginActivity : AppCompatActivity() {
 
             }
 
-            override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+                this@LoginActivity.verificationId = verificationId
 
+                binding.sendOtp.showNormalButton()
+
+                binding.numberLayout.visibility = GONE
+                binding.otpLayout.visibility = VISIBLE
             }
         }
+
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber("+62$number")
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(this)
+            .setCallbacks(callbacks)
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
 
