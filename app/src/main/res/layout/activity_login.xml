@@ -5,10 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".auth.LoginActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimary"
+        />
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/numberLayout"
         android:layout_width="match_parent"
         android:layout_marginTop="-70dp"
+        android:layout_marginHorizontal="36dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
         app:cardElevation="7dp"
@@ -40,12 +47,12 @@
                     android:drawableLeft="@drawable/phone"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.example.myloadingbutton.MyLoadingButton
+            <Button
                 android:id="@+id/sendOtp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginTop="16dp"
-                app:mlb_label="Send OTP"/>
+                android:text="Send OTP"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -54,6 +61,7 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_marginTop="-70dp"
+        android:layout_marginHorizontal="36dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
         app:cardElevation="7dp"
@@ -84,12 +92,12 @@
                     android:drawableLeft="@drawable/phone"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.example.myloadingbutton.MyLoadingButton
+            <Button
                 android:id="@+id/verifyOtp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginTop="16dp"
-                app:mlb_label="Verify OTP"/>
+                android:text="Verify OTP"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

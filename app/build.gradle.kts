@@ -60,5 +60,5 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-    implementation ("com.github.yatindeokar:MyLoadingButton:v1.0.1")
+//    implementation ("com.github.yatindeokar:MyLoadingButton:v1.0.1")
 }
