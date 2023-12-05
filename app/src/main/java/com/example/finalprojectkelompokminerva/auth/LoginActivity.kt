@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onVerificationFailed(p0: FirebaseException) {
-
+                
             }
 
             override fun onCodeSent(
