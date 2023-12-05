@@ -22,7 +22,7 @@ class SplashScreenActivity : AppCompatActivity() {
             if (user == null)
                 startActivity(Intent(this, LoginActivity::class.java))
             else
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, 2000)
     }
