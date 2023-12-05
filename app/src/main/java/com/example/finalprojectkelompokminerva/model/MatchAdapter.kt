@@ -25,11 +25,11 @@ class MatchAdapter : RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
         val item = data[position]
         // Bind your data here
 
-        holder.binding.chat.setOnClickListener {
-            val inte = Intent(context, MessageActivity::class.java)
-            inte.putExtra("userId", list[position].number)
-            context.startActivity(inte)
-        }
+//        holder.binding.chat.setOnClickListener {
+//            val inte = Intent(context, MessageActivity::class.java)
+//            inte.putExtra("userId", list[position].number)
+//            context.startActivity(inte)
+//        }
 
     }
 
