@@ -2,7 +2,10 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+
 }
+
 
 android {
     namespace = "com.example.finalprojectkelompokminerva"
@@ -15,7 +18,13 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildscript {
+        dependencies {
+            classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
+        }
     }
 
     buildTypes {
@@ -61,4 +70,9 @@ dependencies {
     implementation("com.google.firebase:firebase-database-ktx")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 //    implementation ("com.github.yatindeokar:MyLoadingButton:v1.0.1")
+    implementation ("com.google.android.gms:play-services-maps:17.0.0")
+    implementation("androidx.activity:activity-ktx:1.6.1")
+    implementation("androidx.fragment:fragment-ktx:1.5.5")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
 }
