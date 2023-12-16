@@ -32,16 +32,20 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
 <!--            MUST HIDE THE API-->
-        <activity
-            android:name=".model.MessageUserAdapter"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".model.MessageUserAdapter"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".activity.MessageActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SplashScreenActivity"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".auth.RegisterActivity"
@@ -51,12 +55,9 @@
             android:exported="false" />
         <activity
             android:name=".MapsActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/title_activity_maps" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".MainActivity"

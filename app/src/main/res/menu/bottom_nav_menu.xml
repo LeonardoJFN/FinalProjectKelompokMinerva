@@ -6,15 +6,11 @@
         android:icon="@drawable/profile"
         android:title="@string/bottom_menu_profile" />
     <item
-        android:id="@+id/matchFragment"
+        android:id="@+id/mapFragment"
         android:icon="@drawable/match"
-        android:title="@string/bottom_menu_match" />
+        android:title="@string/bottom_menu_map" />
     <item
-        android:id="@+id/likesFragment"
-        android:icon="@drawable/likes"
-        android:title="@string/bottom_menu_likes" />
-    <item
-        android:id="@+id/chatFragment"
+        android:id="@+id/nearbyFragment"
         android:icon="@drawable/chat"
-        android:title="@string/bottom_menu_chat" />
+        android:title="@string/bottom_menu_nearby" />
 </menu>

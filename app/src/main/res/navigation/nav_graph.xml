@@ -7,19 +7,9 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.finalprojectkelompokminerva.ProfileFragment"
+        android:name="com.example.finalprojectkelompokminerva.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/matchFragment"
-        android:name="com.example.finalprojectkelompokminerva.MatchFragment"
-        android:label="fragment_match"
-        tools:layout="@layout/fragment_match" />
-    <fragment
-        android:id="@+id/likesFragment"
-        android:name="com.example.finalprojectkelompokminerva.LikesFragment"
-        android:label="fragment_likes"
-        tools:layout="@layout/fragment_likes" />
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.finalprojectkelompokminerva.ChatFragment"
@@ -34,4 +24,14 @@
         android:name="com.example.finalprojectkelompokminerva.ChatDetailFragment"
         android:label="fragment_chat_detail"
         tools:layout="@layout/fragment_chat_detail" />
+    <fragment
+        android:id="@+id/nearbyFragment2"
+        android:name="com.example.finalprojectkelompokminerva.fragment.NearbyFragment"
+        android:label="fragment_nearby"
+        tools:layout="@layout/fragment_nearby" />
+    <fragment
+        android:id="@+id/mapFragment2"
+        android:name="com.example.finalprojectkelompokminerva.fragment.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
 </navigation>

@@ -5,6 +5,8 @@ data class UserModel(
     val name: String? = "",
     val email: String? = "",
     val age: String? = "",
+    val latitude: String? = "",
+    val longitude: String? = "",
     val image: String? = ""
 
     )
