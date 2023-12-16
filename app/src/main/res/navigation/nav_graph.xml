@@ -25,12 +25,12 @@
         android:label="fragment_chat_detail"
         tools:layout="@layout/fragment_chat_detail" />
     <fragment
-        android:id="@+id/nearbyFragment2"
+        android:id="@+id/nearbyFragment"
         android:name="com.example.finalprojectkelompokminerva.fragment.NearbyFragment"
         android:label="fragment_nearby"
         tools:layout="@layout/fragment_nearby" />
     <fragment
-        android:id="@+id/mapFragment2"
+        android:id="@+id/mapFragment"
         android:name="com.example.finalprojectkelompokminerva.fragment.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
