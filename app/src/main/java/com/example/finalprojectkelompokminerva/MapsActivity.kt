@@ -105,8 +105,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .addOnSuccessListener { location: Location? ->
                 location?.let {
 //Set the user location from latitude and longitude                    coordinate
-                    val userLocation = LatLng(location.latitude,
-                        location.longitude)
+                    val userLocation = LatLng(
+                        location.latitude,
+                        location.longitude
+                    )
 //Move camera to that location
                     updateMapLocation(userLocation)
 //Add a marker at the location position
@@ -127,7 +129,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     myRef.child("longitude").setValue(longitude)
                 }
             }
-    }
+            }
 
     private fun updateMapLocation(location: LatLng) {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
