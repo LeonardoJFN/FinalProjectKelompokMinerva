@@ -83,6 +83,7 @@ class RegisterActivity : AppCompatActivity() {
             image = imageUrl.toString(),
             email = binding.userEmail.text.toString(),
         )
+
         FirebaseDatabase.getInstance().getReference("users")
             .child(FirebaseAuth.getInstance().currentUser!!.phoneNumber!!)
             .setValue(data).addOnCompleteListener {
