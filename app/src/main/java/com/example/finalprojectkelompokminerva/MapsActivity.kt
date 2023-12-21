@@ -7,6 +7,7 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -21,8 +22,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.finalprojectkelompokminerva.databinding.ActivityMapsBinding
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.Task
+import com.google.firebase.database.FirebaseDatabase
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+    val database = FirebaseDatabase.getInstance()
+    val myRef = database.getReference("location")
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -51,17 +56,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             }
     }
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         when {
@@ -117,9 +111,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     updateMapLocation(userLocation)
 //Add a marker at the location position
                     addMarkerAtLocation(userLocation, "You")
+                } // Store location data in Firebase
+                if (location != null) {
+                    myRef.child("latitude").setValue(location.latitude)
+                }
+                if (location != null) {
+                    myRef.child("longitude").setValue(location.longitude)
                 }
             }
     }
+
     private fun updateMapLocation(location: LatLng) {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
             location, 7f))

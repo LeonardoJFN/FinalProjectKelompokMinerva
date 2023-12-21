@@ -30,7 +30,7 @@ class   ProfileFragment : Fragment() {
     private lateinit var glideImageLoader: ImageLoader
     private lateinit var databaseReference: DatabaseReference
     private val selectImage = registerForActivityResult(ActivityResultContracts.GetContent()) { imageUri ->
-        // Update the image in the Firebase Storage
+        // Update the image in the Firebhase Storage
         if (imageUri != null) {
             uploadImage(imageUri)
         }
