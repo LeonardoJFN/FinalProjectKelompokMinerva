@@ -23,11 +23,13 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.example.finalprojectkelompokminerva.databinding.ActivityMapsBinding
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     val database = FirebaseDatabase.getInstance()
     val myRef = database.getReference("location")
+    val phoneNumber = FirebaseAuth.getInstance().currentUser?.phoneNumber
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -122,7 +124,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val database = FirebaseDatabase.getInstance()
 
                     // Get a reference to the "location" child
-                    val myRef = database.getReference("location")
+                    val myRef = database.getReference("users").child(phoneNumber.toString())
 
                     // Set the latitude and longitude
                     myRef.child("latitude").setValue(latitude)
