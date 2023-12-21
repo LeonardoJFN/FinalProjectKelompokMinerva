@@ -113,10 +113,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     addMarkerAtLocation(userLocation, "You")
                 } // Store location data in Firebase
                 if (location != null) {
-                    myRef.child("latitude").setValue(location.latitude)
-                }
-                if (location != null) {
-                    myRef.child("longitude").setValue(location.longitude)
+                    val latitude = location.latitude
+                    val longitude = location.longitude
+
+                    // Get a reference to the database
+                    val database = FirebaseDatabase.getInstance()
+
+                    // Get a reference to the "location" child
+                    val myRef = database.getReference("location")
+
+                    // Set the latitude and longitude
+                    myRef.child("latitude").setValue(latitude)
+                    myRef.child("longitude").setValue(longitude)
                 }
             }
     }
