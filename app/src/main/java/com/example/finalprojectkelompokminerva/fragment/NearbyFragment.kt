@@ -1,60 +1,140 @@
+// NearbyFragment.kt
 package com.example.finalprojectkelompokminerva.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.fragment.app.Fragment
+import com.example.finalprojectkelompokminerva.GlideImageLoader
 import com.example.finalprojectkelompokminerva.R
+import com.google.firebase.database.*
+import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.material3.MaterialTheme.typography
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+data class UserData(
+    val name: String,
+    val email: String,
+    val phoneNumber: String,
+    val location: String,
+    val image: String
+)
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NearbyFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NearbyFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var usersList: MutableList<UserData>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_nearby, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NearbyFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NearbyFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("users")
+        usersList = mutableListOf()
+
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                usersList.clear()
+
+                for (userSnapshot in snapshot.children) {
+                    val name = userSnapshot.child("name").getValue(String::class.java) ?: ""
+                    val email = userSnapshot.child("email").getValue(String::class.java) ?: ""
+                    val phoneNumber =
+                        userSnapshot.child("phoneNumber").getValue(String::class.java) ?: ""
+                    val location = userSnapshot.child("location").getValue(String::class.java)
+                        ?: ""
+                    val image = userSnapshot.child("image").getValue(String::class.java) ?: ""
+
+                    usersList.add(UserData(name, email, phoneNumber, location, image))
                 }
+
+                updateLazyColumn(view)
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Failed to read data", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun updateLazyColumn(view: View) {
+        val lazyColumnView = view.findViewById<ComposeView>(R.id.lazyColumnView)
+        lazyColumnView.setContent {
+            NearbyList(usersList)
+        }
+    }
+
+    @Composable
+    private fun NearbyList(users: List<UserData>) {
+        LazyColumn {
+            items(items = users) { user ->
+                UserItem(user)
+            }
+        }
+    }
+
+    @Composable
+    private fun UserItem(user: UserData) {
+        val context = LocalContext.current
+        val imageLoader = GlideImageLoader(context)
+
+        // Load the user profile image using Glide
+        val profileImage = imageLoader.loadImageAsBitmap(user.image).asImageBitmap()
+
+        // Display the user information
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            // Display the profile image
+            Image(
+                bitmap = profileImage,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.primary)
+            )
+
+            // Display user name and phone number
+            Column(
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .align(Alignment.CenterVertically)
+            ) {
+                Text(
+                    text = "Name: ${user.name}",
+                    style = typography.subtitle1
+                )
+                Text(
+                    text = "Phone: ${user.phoneNumber}",
+                    style = typography.body1
+                )
+            }
+        }
     }
 }
