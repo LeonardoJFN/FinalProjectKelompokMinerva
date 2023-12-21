@@ -1,5 +1,6 @@
 package com.example.finalprojectkelompokminerva.fragment
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.finalprojectkelompokminerva.GlideImageLoader
 import com.example.finalprojectkelompokminerva.ImageLoader
 import com.example.finalprojectkelompokminerva.R
+import com.example.finalprojectkelompokminerva.auth.LoginActivity
 import com.example.finalprojectkelompokminerva.utils.Config
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -148,6 +150,17 @@ class   ProfileFragment : Fragment() {
             // Inform the user that the update was successful (you can use Toast or Snackbar)
             Toast.makeText(requireContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show()
         }
+        val logoutButton = view.findViewById<Button>(R.id.logoutButton)
+        logoutButton.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+
+            // After signing out, navigate back to the login activity
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            requireActivity().finish()
+        }
+
         val profileImage = view.findViewById<CircleImageView>(R.id.profileImage)
         profileImage.setOnClickListener {
             selectImage.launch("image/*")
