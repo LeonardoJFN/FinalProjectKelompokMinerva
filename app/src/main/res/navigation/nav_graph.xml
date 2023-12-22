@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.finalprojectkelompokminerva.fragment.ProfileFragment"
+        android:name="com.umn.finalprojectkelompokminerva.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.finalprojectkelompokminerva.ChatFragment"
+        android:name="com.umn.finalprojectkelompokminerva.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
         <action
@@ -21,17 +21,17 @@
     </fragment>
     <fragment
         android:id="@+id/chatDetailFragment"
-        android:name="com.example.finalprojectkelompokminerva.ChatDetailFragment"
+        android:name="com.umn.finalprojectkelompokminerva.ChatDetailFragment"
         android:label="fragment_chat_detail"
         tools:layout="@layout/fragment_chat_detail" />
     <fragment
         android:id="@+id/nearbyFragment"
-        android:name="com.example.finalprojectkelompokminerva.fragment.NearbyFragment"
+        android:name="com.umn.finalprojectkelompokminerva.fragment.NearbyFragment"
         android:label="fragment_nearby"
         tools:layout="@layout/fragment_nearby" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.finalprojectkelompokminerva.fragment.MapFragment"
+        android:name="com.umn.finalprojectkelompokminerva.fragment.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
 </navigation>

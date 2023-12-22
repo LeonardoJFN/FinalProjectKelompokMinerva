@@ -28,11 +28,11 @@ secrets {
 
 
 android {
-    namespace = "com.example.finalprojectkelompokminerva"
+    namespace = "com.umn.finalprojectkelompokminerva"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.finalprojectkelompokminerva"
+        applicationId = "com.umn.finalprojectkelompokminerva"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -44,7 +44,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
