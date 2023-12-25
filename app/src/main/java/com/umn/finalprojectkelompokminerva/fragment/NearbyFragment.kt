@@ -12,6 +12,8 @@
 //import androidx.compose.foundation.lazy.LazyColumn
 //import androidx.compose.foundation.lazy.items
 //import androidx.compose.foundation.shape.CircleShape
+//import androidx.compose.material.MaterialTheme.typography
+//import androidx.compose.material.Text
 ////import androidx.compose.material3.MaterialTheme
 ////import androidx.compose.material3.Text
 //import androidx.compose.runtime.Composable
@@ -126,14 +128,14 @@
 //                    .padding(start = 16.dp)
 //                    .align(Alignment.CenterVertically)
 //            ) {
-////                Text(
-////                    text = "Name: ${user.name}",
-//////                    style = typography.subtitle1
-////                )
-////                Text(
-////                    text = "Phone: ${user.phoneNumber}",
-//////                    style = typography.body1
-////                )
+//                Text(
+//                    text = "Name: ${user.name}",
+//                    style = typography.subtitle1
+//                )
+//                Text(
+//                    text = "Phone: ${user.phoneNumber}",
+//                    style = typography.body1
+//                )
 //            }
 //        }
 //    }
