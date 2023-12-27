@@ -16,13 +16,8 @@ class MapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_map, container, false)
-
-        // Find the Button by its ID
         val btnShowMap = view.findViewById<Button>(R.id.btnShowMap)
-
-        // Set up a click listener for the button
         btnShowMap.setOnClickListener {
-            // Redirect to the map activity
             val intent = Intent(requireContext(), MapsActivity::class.java)
             startActivity(intent)
         }

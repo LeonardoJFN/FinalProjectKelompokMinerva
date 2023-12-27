@@ -54,7 +54,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun verifyOtp(otp: String) {
-//        binding.sendOtp.showLoadingButton()
         dialog.show()
         val credential = PhoneAuthProvider.getCredential(verificationId!!, otp)
 
@@ -62,11 +61,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
         private fun sendOtp(number: String) {
-//        binding.sendOtp.showLoadingButton()
         dialog.show()
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-//                binding.sendOtp.showNormalButton()
                 dialog.dismiss()
                 sigmInWithPhoneAuthCredential(credential)
             }
@@ -81,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 this@LoginActivity.verificationId = verificationId
                 dialog.dismiss()
-//                binding.sendOtp.showNormalButton()
 
                 binding.numberLayout.visibility = GONE
                 binding.otpLayout.visibility = VISIBLE
@@ -101,7 +97,6 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-//                    binding.sendOtp.showNormalButton()
                     checkUserExist(binding.userNumber.text.toString())
                 } else{
                     dialog.dismiss()

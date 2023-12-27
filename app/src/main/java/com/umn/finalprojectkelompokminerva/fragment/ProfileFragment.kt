@@ -32,7 +32,6 @@ class   ProfileFragment : Fragment() {
     private lateinit var glideImageLoader: ImageLoader
     private lateinit var databaseReference: DatabaseReference
     private val selectImage = registerForActivityResult(ActivityResultContracts.GetContent()) { imageUri ->
-        // Update the image in the Firebhase Storage
         if (imageUri != null) {
             uploadImage(imageUri)
         }
@@ -82,7 +81,6 @@ class   ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
 
     }
@@ -96,12 +94,7 @@ class   ProfileFragment : Fragment() {
 
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-
-                // Check if the dataSnapshot exists and has children
                 if (dataSnapshot.exists() && dataSnapshot.hasChildren()) {
-                    // Access the data using dataSnapshot
                     val age = dataSnapshot.child("age").getValue(String::class.java)
                     val email = dataSnapshot.child("email").getValue(String::class.java)
                     val image = dataSnapshot.child("image").getValue(String::class.java)
@@ -110,8 +103,6 @@ class   ProfileFragment : Fragment() {
                     println("Email: $email")
                     println("Image: $image")
                     println("Name: $name")
-
-                    // Do something with the retrieved values
                     view.findViewById<TextInputEditText>(R.id.editName)?.setText(name)
                     view.findViewById<TextView>(R.id.userPhoneNumber)?.setText(phoneNumber)
                     view.findViewById<TextInputEditText>(R.id.editEmail)?.setText(email)
@@ -124,37 +115,31 @@ class   ProfileFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
                 println("Failed to read value: ${error.toException()}")
             }
         })
         val editButton = view.findViewById<Button>(R.id.editButton)
         editButton.setOnClickListener {
-            // Get the updated values from the TextInputEditText fields
             val updatedName = view.findViewById<TextInputEditText>(R.id.editName)?.text.toString()
             val updatedEmail = view.findViewById<TextInputEditText>(R.id.editEmail)?.text.toString()
             val updatedAge = view.findViewById<TextInputEditText>(R.id.editAge)?.text.toString()
 
-            // Update the values in the database
             val userRef = FirebaseDatabase.getInstance().getReference("users").child(phoneNumber.toString())
             userRef.child("name").setValue(updatedName)
             userRef.child("email").setValue(updatedEmail)
             userRef.child("age").setValue(updatedAge)
 
-            // Optionally, you can update the local views with the new values
             view.findViewById<TextView>(R.id.userPhoneNumber)?.setText(phoneNumber)
             view.findViewById<TextInputEditText>(R.id.editName)?.setText(updatedName)
             view.findViewById<TextInputEditText>(R.id.editEmail)?.setText(updatedEmail)
             view.findViewById<TextInputEditText>(R.id.editAge)?.setText(updatedAge)
 
-            // Inform the user that the update was successful (you can use Toast or Snackbar)
             Toast.makeText(requireContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show()
         }
         val logoutButton = view.findViewById<Button>(R.id.logoutButton)
         logoutButton.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
 
-            // After signing out, navigate back to the login activity
             val intent = Intent(requireContext(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

@@ -7,6 +7,6 @@ data class UserModel(
     val age: String? = "",
     val latitude: String? = "",
     val longitude: String? = "",
-    val image: String? = ""
-
+    val image: String? = "",
+    val location:String? = ""
     )

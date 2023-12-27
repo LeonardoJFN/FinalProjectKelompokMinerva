@@ -14,7 +14,6 @@ class GlideImageLoader(private val context: Context) : ImageLoader {
     }
 
     override fun loadImageAsBitmap(imageUrl: String): Bitmap {
-        // This Glide method loads the image into a Bitmap
         return Glide.with(context)
             .asBitmap()
             .load(imageUrl)
