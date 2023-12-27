@@ -90,7 +90,6 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "User register sucessfull", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(this, it.exception!!.message, Toast.LENGTH_SHORT).show()
-//test
                 }
             }
     }

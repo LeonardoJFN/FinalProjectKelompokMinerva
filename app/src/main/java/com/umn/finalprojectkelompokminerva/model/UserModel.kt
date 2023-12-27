@@ -8,5 +8,4 @@ data class UserModel(
     val latitude: String? = "",
     val longitude: String? = "",
     val image: String? = ""
-
     )

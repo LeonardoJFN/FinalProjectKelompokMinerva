@@ -1,14 +1,10 @@
 //package com.umn.finalprojectkelompokminerva.model
 //
 //import android.content.Context
-//import androidx.appcompat.app.AppCompatActivity
-//import android.os.Bundle
 //import android.view.LayoutInflater
 //import android.view.ViewGroup
 //import androidx.recyclerview.widget.RecyclerView
 //import com.bumptech.glide.Glide
-//import com.umn.finalprojectkelompokminerva.R
-//import com.umn.finalprojectkelompokminerva.databinding.ActivityMessageBinding
 //import com.umn.finalprojectkelompokminerva.databinding.UserItemLayoutBinding
 //import com.google.firebase.database.DataSnapshot
 //import com.google.firebase.database.FirebaseDatabase
