@@ -19,11 +19,11 @@
 <!--            android:id="@+id/action_chatFragment_to_chatDetailFragment"-->
 <!--            app:destination="@id/chatDetailFragment" />-->
 <!--    </fragment>-->
-    <fragment
-        android:id="@+id/chatDetailFragment"
-        android:name="com.umn.finalprojectkelompokminerva.ChatDetailFragment"
-        android:label="fragment_chat_detail"
-        tools:layout="@layout/fragment_chat_detail" />
+<!--    <fragment-->
+<!--        android:id="@+id/chatDetailFragment"-->
+<!--        android:name="com.umn.finalprojectkelompokminerva.ChatDetailFragment"-->
+<!--        android:label="fragment_chat_detail"-->
+<!--        tools:layout="@layout/fragment_chat_detail" />-->
     <fragment
         android:id="@+id/nearbyFragment"
         android:name="com.umn.finalprojectkelompokminerva.fragment.NearbyFragment"
