@@ -1,55 +1,57 @@
 
 package com.umn.finalprojectkelompokminerva.fragment
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.umn.finalprojectkelompokminerva.GlideImageLoader
-import com.umn.finalprojectkelompokminerva.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
-import androidx.compose.ui.graphics.asImageBitmap
+import com.umn.finalprojectkelompokminerva.R
+import com.umn.finalprojectkelompokminerva.model.UserModel
+class UsersAdapter(private val users: List<UserModel>) : RecyclerView.Adapter<UserViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
+        return UserViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        holder.bind(users[position])
+    }
+
+    override fun getItemCount() = users.size
+}
+
+class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val userName: TextView = itemView.findViewById(R.id.userName)
+    private val userLocation: TextView = itemView.findViewById(R.id.user_location)
+
+    fun bind(user: UserModel) {
+        userName.text = user.name
+        userLocation.text = user.location
+    }
+}
 
 
-val MaterialTheme.primary: androidx.compose.ui.graphics.Color
-    @Composable
-    get() = this.colors.primary
-
-data class UserData(
-    val name: String,
-    val email: String,
-    val phoneNumber: String,
-    val location: String,
-    val image: String
-)
 
 class NearbyFragment : Fragment() {
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var usersList: MutableList<UserData>
+    private lateinit var usersList: MutableList<UserModel>
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_nearby, container, false)
+        val view = inflater.inflate(R.layout.fragment_nearby, container, false)
+        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,76 +65,16 @@ class NearbyFragment : Fragment() {
                 usersList.clear()
 
                 for (userSnapshot in snapshot.children) {
-                    val name = userSnapshot.child("name").getValue(String::class.java) ?: ""
-                    val email = userSnapshot.child("email").getValue(String::class.java) ?: ""
-                    val phoneNumber =
-                        userSnapshot.child("phoneNumber").getValue(String::class.java) ?: ""
-                    val location = userSnapshot.child("location").getValue(String::class.java)
-                        ?: ""
-                    val image = userSnapshot.child("image").getValue(String::class.java) ?: ""
-
-                    usersList.add(UserData(name, email, phoneNumber, location, image))
+                    val user = userSnapshot.getValue(UserModel::class.java)
+                    user?.let { usersList.add(it) }
                 }
 
-                updateLazyColumn(view)
+                recyclerView.adapter = UsersAdapter(usersList)
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(requireContext(), "Failed to read data", Toast.LENGTH_SHORT).show()
+                // Handle error
             }
         })
-    }
-
-    private fun updateLazyColumn(view: View) {
-        val lazyColumnView = view.findViewById<ComposeView>(R.id.lazyColumnView)
-        lazyColumnView.setContent {
-            NearbyList(usersList)
-        }
-    }
-
-    @Composable
-    private fun NearbyList(users: List<UserData>) {
-        LazyColumn {
-            items(items = users) { user ->
-                UserItem(user)
-            }
-        }
-    }
-
-    @Composable
-    private fun UserItem(user: UserData) {
-        val context = LocalContext.current
-        val imageLoader = GlideImageLoader(context)
-
-        val profileImage = imageLoader.loadImageAsBitmap(user.image).asImageBitmap()
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Image(
-                bitmap = profileImage,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(50.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colors.primary)
-            )
-            Column(
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .align(Alignment.CenterVertically)
-            ) {
-                Text(
-                    text = "Name: ${user.name}",
-                    style = typography.subtitle1
-                )
-                Text(
-                    text = "Phone: ${user.phoneNumber}",
-                    style = typography.body1
-                )
-            }
-        }
     }
 }
